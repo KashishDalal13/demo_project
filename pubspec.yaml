@@ -43,6 +43,7 @@ dependencies:
   image_gallery_saver: ^2.0.3
   flutter_signature_pad: ^3.0.1
   share_plus: ^7.2.1
+  pdf: ^3.10.8
   
 
 dev_dependencies:
