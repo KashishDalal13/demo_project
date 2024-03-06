@@ -5,7 +5,8 @@ import 'package:path_provider/path_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:signature/signature.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
-import 'package:share/share.dart';
+// Import the new share_plus dependency
+import 'package:share_plus/share_plus.dart';
 
 void main() {
   runApp(MyApp());
@@ -46,7 +47,7 @@ class _SignaturePadExampleState extends State<SignaturePadExample> {
       appBar: AppBar(
         title: Text('Signature Pad Example'),
       ),
-      
+
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -66,7 +67,7 @@ class _SignaturePadExampleState extends State<SignaturePadExample> {
             color: Colors.grey[200],
             child: Column(
               children: [
-                 Slider(
+                Slider(
                   value: _penStrokeWidth,
                   min: 1,
                   max: 20,
@@ -116,7 +117,8 @@ class _SignaturePadExampleState extends State<SignaturePadExample> {
                       onPressed: () async {
                         final signatureBytes = await _controller.toPngBytes();
                         final signaturePath =
-                            await saveSignatureAsImage(signatureBytes!);
+                        await saveSignatureAsImage(signatureBytes!);
+                        // Call the new method for sharing
                         await shareSignatureImage(signaturePath);
                       },
                       child: Text('Save & Share'),
@@ -150,6 +152,7 @@ class _SignaturePadExampleState extends State<SignaturePadExample> {
     return signaturePath;
   }
 
+  // Define the new method for sharing using the share_plus package
   Future<void> shareSignatureImage(String imagePath) async {
     try {
       await Share.shareFiles([imagePath], text: 'Check out my signature!');
